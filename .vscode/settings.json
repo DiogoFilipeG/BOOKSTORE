@@ -1,0 +1,15 @@
+{
+  "editor.defaultFormatter": "esbenp.prettier-vscode", // Set Prettier as the default formatter
+  "[typescript]": {
+    "editor.formatOnSave": true, // Format TypeScript files on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Set Prettier as the default formatter for TypeScript files
+  },
+  "[html]": {
+    "editor.formatOnSave": true, // Format HTML files on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Set Prettier as the default formatter for HTML files
+  },
+  "[scss]": {
+    "editor.formatOnSave": true, // Format SCSS files on save
+    "editor.defaultFormatter": "esbenp.prettier-vscode" // Set Prettier as the default formatter for SCSS files
+  }
+}

@@ -1,0 +1,37 @@
+.main {
+  align-items: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 100vh;
+  padding: 6rem;
+}
+
+.table {
+  border-collapse: collapse;
+  color: #222;
+  font-size: 0.825rem;
+  margin-bottom: 1rem;
+  margin-top: 3rem;
+  width: 100%;
+
+  td {
+    border-top: 1px solid #dee2e6;
+    padding: 0.75rem;
+    vertical-align: top;
+  }
+
+  th {
+    border-bottom: 2px solid #dee2e6;
+    border-top: 1px solid #dee2e6;
+    padding: 0.75rem;
+    text-align: left;
+    vertical-align: bottom;
+  }
+
+  .table__body {
+    :global(tr:nth-of-type(odd)) {
+      background-color: rgb(0 0 0 / 5%);
+    }
+  }
+}
