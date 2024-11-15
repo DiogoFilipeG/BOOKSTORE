@@ -1,13 +1,13 @@
 {
   "name": "bynd-frontend-assessment-angular",
   "version": "1.0.0",
-  "description": "BYND Frontend React coding assessment",
+  "description": "BYND Frontend Angular coding assessment",
   "repository": {
     "type": "git",
     "url": "git@bitbucket.org:byndops/bynd-frontend-assessment-angular.git"
   },
   "contributors": [
-    "Joao Sequeira <joao.sequeira@bynd.com> (https://bynd.com/)"
+    "Diogo Guinapo <diogo.filipe.guinapo@gmail.com>"
   ],
   "scripts": {
     "ng": "ng",
@@ -42,7 +42,7 @@
     "@angular-eslint/builder": "15.2.1",
     "@angular-eslint/eslint-plugin": "^15.2.1",
     "@angular-eslint/eslint-plugin-template": "15.2.1",
-    "@angular-eslint/schematics": "17.3.11",
+    "@angular-eslint/schematics": "18.4.0",
     "@angular-eslint/template-parser": "^15.2.1",
     "@angular/cli": "~17.3.11",
     "@angular/compiler-cli": "^17.3.12",
@@ -62,7 +62,7 @@
     "karma-coverage": "~2.2.0",
     "karma-jasmine": "~5.1.0",
     "karma-jasmine-html-reporter": "~2.0.0",
-    "msw": "5.4.5",
+    "msw": "2.6.4",
     "prettier": "3.0.3",
     "stylelint": "15.10.3",
     "stylelint-config-standard-scss": "9.0.0",
