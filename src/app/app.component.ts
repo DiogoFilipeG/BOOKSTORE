@@ -1,6 +1,5 @@
-import { HttpClient } from '@angular/common/http';
-import { ChangeDetectionStrategy, Component, inject, OnInit } from '@angular/core';
-import { BookList } from './models/book.model';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { NavigationComponent } from './core/navigation/navigation.component';
 
 @Component({
   selector: 'app-root',
@@ -8,16 +7,6 @@ import { BookList } from './models/book.model';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [NavigationComponent],
 })
-export class AppComponent implements OnInit {
-  private readonly http = inject(HttpClient);
-
-  books: BookList;
-
-  ngOnInit(): void {
-    this.http.get('/api/v1/books').subscribe((response: any) => {
-      this.books = response;
-      console.log(this.books);
-    });
-  }
-}
+export class AppComponent {}
