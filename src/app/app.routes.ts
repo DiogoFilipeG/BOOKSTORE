@@ -9,6 +9,11 @@ export const routes: Routes = [
         path: '',
         component: HomeComponent,
       },
+      {
+        path: 'books',
+        loadComponent: () =>
+          import('./features/books/book-catalog/book-catalog.component').then((b) => b.BookCatalogComponent),
+      },
     ],
   },
 ];
