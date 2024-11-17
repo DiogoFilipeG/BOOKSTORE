@@ -28,5 +28,4 @@ export class BookCatalogComponent {
   }
 
   displayedColumns = ['title', 'author', 'publisher', 'isbn', 'actions'];
-  //headerNames = ['Title', 'Author(s)', 'Publisher(s)', 'ISBN'];
 }
