@@ -14,6 +14,11 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./features/books/book-catalog/book-catalog.component').then((b) => b.BookCatalogComponent),
       },
+      {
+        path: 'books/:id',
+        loadComponent: () =>
+          import('./features/books/book-detail/book-detail.component').then((b) => b.BookDetailComponent),
+      },
     ],
   },
 ];
