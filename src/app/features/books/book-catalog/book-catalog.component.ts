@@ -8,11 +8,20 @@ import { RouterLink } from '@angular/router';
 import { BooksService } from '../books.service';
 import { BooksStore } from '../book-store';
 import { ViewModel } from '../types/view-model';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 @Component({
   selector: 'app-book-catalog',
   standalone: true,
-  imports: [MatTableModule, MatPaginatorModule, MatSortModule, CommonModule, MatButtonModule, RouterLink],
+  imports: [
+    MatTableModule,
+    MatPaginatorModule,
+    MatSortModule,
+    CommonModule,
+    MatButtonModule,
+    RouterLink,
+    MatProgressSpinnerModule,
+  ],
   templateUrl: './book-catalog.component.html',
   styleUrl: './book-catalog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -23,6 +32,7 @@ export class BookCatalogComponent {
 
   dataSource = computed(() => new MatTableDataSource<ViewModel>(this.bookStore.dataSource()));
   isLoading = computed(() => this.bookStore.isLoading());
+
   constructor() {
     this.bookStore.loadBooks();
   }
