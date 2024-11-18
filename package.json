@@ -38,6 +38,7 @@
     "@angular/platform-browser-dynamic": "^18.2.12",
     "@angular/router": "^18.2.12",
     "@ngrx/signals": "18.1.1",
+    "bootstrap": "5.3.3",
     "ng-mocks": "14.13.1",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
