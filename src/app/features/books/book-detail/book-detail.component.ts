@@ -30,9 +30,23 @@ export class BookDetailComponent implements AfterViewInit {
     if (!this.id) {
       return;
     }
-    const foundBook = this.bookStore.findBookById(this.id);
-    if (foundBook) {
-      this.bookData.set(foundBook);
-    }
+
+    this.bookStore.findBookById(this.id).subscribe((book) => {
+      if (book) {
+        const mappedBook = {
+          id: book.id,
+          title: book.name,
+          description: book.description,
+          isbn: book.isbn,
+          tags: book.tags.join(', '),
+          price: book.price,
+          author: book.author.map((author) => author.name).join(', '),
+          publisher: book.publisher.map((publisher) => publisher.name).join(', '),
+          createdAt: book.created_at,
+          updatedAt: book.updated_at,
+        };
+        this.bookData.set(mappedBook);
+      }
+    });
   }
 }

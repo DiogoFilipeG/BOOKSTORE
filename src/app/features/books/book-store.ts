@@ -2,6 +2,7 @@ import { computed, inject } from '@angular/core';
 import { signalStore, withComputed, withState, withMethods, patchState } from '@ngrx/signals';
 import { Book, BookList } from 'src/app/models/book.model';
 import { BooksService } from './books.service';
+import { map } from 'rxjs';
 
 type BooksState = {
   total: number;
@@ -44,7 +45,9 @@ export const BooksStore = signalStore(
       });
     },
     findBookById(id: number) {
-      return store.dataSource().find((book) => book.id === id);
+      return booksService
+        .getBooks()
+        .pipe(map((books: BookList) => books.data.find((book) => book.id === id)));
     },
   }))
 );
