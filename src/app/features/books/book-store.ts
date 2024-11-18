@@ -3,6 +3,7 @@ import { signalStore, withComputed, withState, withMethods, patchState } from '@
 import { Book, BookList } from 'src/app/models/book.model';
 import { BooksService } from './books.service';
 import { map } from 'rxjs';
+import { LocalStorageService } from '@app/shared/local-storage.service';
 
 type BooksState = {
   total: number;
@@ -37,17 +38,25 @@ export const BooksStore = signalStore(
       ),
     };
   }),
-  withMethods((store, booksService = inject(BooksService)) => ({
-    loadBooks() {
-      patchState(store, { isLoading: true });
-      booksService.getBooks().subscribe((books: BookList) => {
-        patchState(store, { books: books.data, total: books.total, isLoading: false });
-      });
-    },
-    findBookById(id: number) {
-      return booksService
-        .getBooks()
-        .pipe(map((books: BookList) => books.data.find((book) => book.id === id)));
-    },
-  }))
+  withMethods(
+    (store, booksService = inject(BooksService), localStorageService = inject(LocalStorageService)) => ({
+      loadBooks() {
+        patchState(store, { isLoading: true });
+        booksService.getBooks().subscribe((books: BookList) => {
+          patchState(store, { books: books.data, total: books.total, isLoading: false });
+        });
+      },
+      findBookById(id: number) {
+        return booksService
+          .getBooks()
+          .pipe(map((books: BookList) => books.data.find((book) => book.id === id)));
+      },
+      addBook(newBook: Book) {
+        const storedBooks = localStorageService.getFromLocalStorage();
+        const updatedBooks = [newBook, ...storedBooks];
+        localStorageService.saveToLocalStorage(updatedBooks);
+        patchState(store, { books: [newBook, ...store.books()] });
+      },
+    })
+  )
 );

@@ -5,10 +5,11 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatSortModule } from '@angular/material/sort';
 import { MatTableDataSource, MatTableModule } from '@angular/material/table';
 import { RouterLink } from '@angular/router';
-import { BooksService } from '../books.service';
 import { BooksStore } from '../book-store';
 import { ViewModel } from '../types/view-model';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatDialog, MatDialogModule } from '@angular/material/dialog';
+import { BookFormComponent } from '../book-form/book-form.component';
 
 @Component({
   selector: 'app-book-catalog',
@@ -21,21 +22,28 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
     MatButtonModule,
     RouterLink,
     MatProgressSpinnerModule,
+    MatDialogModule,
   ],
   templateUrl: './book-catalog.component.html',
   styleUrl: './book-catalog.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class BookCatalogComponent {
-  bookService = inject(BooksService);
-  bookStore = inject(BooksStore);
+  private readonly bookStore = inject(BooksStore);
+  private readonly dialog = inject(MatDialog);
 
   dataSource = computed(() => new MatTableDataSource<ViewModel>(this.bookStore.dataSource()));
   isLoading = computed(() => this.bookStore.isLoading());
+  displayedColumns = ['title', 'author', 'publisher', 'isbn', 'actions'];
 
   constructor() {
     this.bookStore.loadBooks();
   }
 
-  displayedColumns = ['title', 'author', 'publisher', 'isbn', 'actions'];
+  addBook(): void {
+    this.dialog.open(BookFormComponent, {
+      height: '80vh',
+      width: '60vw',
+    });
+  }
 }

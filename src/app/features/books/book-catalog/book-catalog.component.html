@@ -2,9 +2,9 @@
 <mat-spinner></mat-spinner>
 }
 <div class="mat-elevation-z2">
+  <a mat-raised-button (click)="addBook()">Add Book</a>
   <table mat-table [dataSource]="dataSource()" class="full-width-table" aria-label="Elements">
     @for (column of displayedColumns; track column) {
-
     <ng-container [matColumnDef]="column">
       <th mat-header-cell *matHeaderCellDef>{{ column }}</th>
       @if (column === 'actions') {
