@@ -1,28 +1,47 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { MockBuilder, MockRender } from 'ng-mocks';
 import { BookDetailComponent } from './book-detail.component';
+import { BooksStore } from '../book-store';
+import data from './../../../../mocks/data/books';
+import { of } from 'rxjs';
 
 describe('BookDetailComponent', () => {
-  let component: BookDetailComponent;
-  let fixture: ComponentFixture<BookDetailComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ BookDetailComponent ]
-    })
-    .compileComponents();
-  }));
-
-  beforeEach(() => {
-    fixture = TestBed.createComponent(BookDetailComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+  beforeEach(async () => {
+    await MockBuilder(BookDetailComponent).mock(BooksStore, {
+      findBookById: jest.fn().mockReturnValue(of(data.data[0])),
+      loadBooks: jest.fn(),
+    });
   });
 
   it('should create', () => {
+    const fixture = MockRender(BookDetailComponent);
+    const component = fixture.componentInstance;
     expect(component).toBeTruthy();
   });
+
+  it('should not call findBookById if id is not provided', () => {
+    const fixture = MockRender(BookDetailComponent);
+    fixture.detectChanges();
+    const bookStore = fixture.debugElement.injector.get(BooksStore);
+    expect(bookStore.findBookById).not.toHaveBeenCalled();
+  });
+
+  it('should call findBookById with id if provided', () => {
+    const fixture = MockRender(BookDetailComponent, {
+      id: 1,
+    });
+    fixture.detectChanges();
+    const bookStore = fixture.debugElement.injector.get(BooksStore);
+    expect(bookStore.findBookById).toHaveBeenCalledTimes(1);
+    expect(bookStore.findBookById).toHaveBeenCalledWith(1);
+  });
+
+  // it('should display book title', () => {
+  //   const fixture = MockRender(BookDetailComponent, {
+  //     id: 1,
+  //   });
+  //   fixture.detectChanges();
+  //   const cardTitle = ngMocks.find('mat-card-title').nativeElement.textContent;
+  //   console.log(cardTitle);
+  //   expect(cardTitle).toContain('OCP: Oracle9i Certification Kit');
+  // });
 });

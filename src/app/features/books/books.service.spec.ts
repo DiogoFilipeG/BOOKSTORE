@@ -1,16 +1,25 @@
-/* tslint:disable:no-unused-variable */
+import { MockBuilder } from 'ng-mocks';
+import { TestBed } from '@angular/core/testing';
+import { BooksService } from './books.service';
+import { HttpClient } from '@angular/common/http';
+import data from './../../../mocks/data/books';
 
-import { TestBed, inject } from '@angular/core/testing';
-import { BooksService } from '../books/books.service';
+describe('BooksService', () => {
+  let service: BooksService;
+  let testingModule;
 
-describe('Service: Books', () => {
-  beforeEach(() => {
-    TestBed.configureTestingModule({
-      providers: [BooksService],
-    });
+  beforeEach(async () => {
+    testingModule = await MockBuilder(BooksService)
+      .mock(HttpClient, { get: jest.fn().mockReturnValue(data) })
+      .build();
+
+    TestBed.configureTestingModule(testingModule);
+
+    service = TestBed.inject(BooksService);
   });
 
-  it('should ...', inject([BooksService], (service: BooksService) => {
-    expect(service).toBeTruthy();
-  }));
+  it('should get books', () => {
+    const books = service.getBooks();
+    expect(books).toEqual(data);
+  });
 });
