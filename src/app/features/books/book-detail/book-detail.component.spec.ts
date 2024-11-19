@@ -34,14 +34,4 @@ describe('BookDetailComponent', () => {
     expect(bookStore.findBookById).toHaveBeenCalledTimes(1);
     expect(bookStore.findBookById).toHaveBeenCalledWith(1);
   });
-
-  // it('should display book title', () => {
-  //   const fixture = MockRender(BookDetailComponent, {
-  //     id: 1,
-  //   });
-  //   fixture.detectChanges();
-  //   const cardTitle = ngMocks.find('mat-card-title').nativeElement.textContent;
-  //   console.log(cardTitle);
-  //   expect(cardTitle).toContain('OCP: Oracle9i Certification Kit');
-  // });
 });

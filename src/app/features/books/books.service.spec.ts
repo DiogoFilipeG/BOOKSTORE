@@ -1,25 +1,33 @@
 import { MockBuilder } from 'ng-mocks';
-import { TestBed } from '@angular/core/testing';
 import { BooksService } from './books.service';
 import { HttpClient } from '@angular/common/http';
-import data from './../../../mocks/data/books';
+import { LocalStorageService } from './../../shared/local-storage.service';
+import { TestBed } from '@angular/core/testing';
+import { of } from 'rxjs';
 
+const data = {
+  data: [
+    { id: 1, title: 'Book 1' },
+    { id: 2, title: 'Book 2' },
+  ],
+};
+const storedData = [{ id: 3, title: 'Book 3' }];
 describe('BooksService', () => {
-  let service: BooksService;
-  let testingModule;
-
+  let booksService: BooksService;
   beforeEach(async () => {
-    testingModule = await MockBuilder(BooksService)
-      .mock(HttpClient, { get: jest.fn().mockReturnValue(data) })
+    const testingModule = await MockBuilder(BooksService)
+      .mock(LocalStorageService, {
+        getFromLocalStorage: jest.fn().mockReturnValue(storedData),
+      })
+      .mock(HttpClient, { get: jest.fn().mockReturnValue(of(data)) })
       .build();
-
     TestBed.configureTestingModule(testingModule);
-
-    service = TestBed.inject(BooksService);
+    booksService = TestBed.inject(BooksService);
   });
 
-  it('should get books', () => {
-    const books = service.getBooks();
-    expect(books).toEqual(data);
+  it('should return a list of books', () => {
+    booksService.getBooks().subscribe((result) => {
+      expect(result).toEqual(data);
+    });
   });
 });

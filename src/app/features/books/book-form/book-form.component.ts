@@ -4,8 +4,8 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { MatInputModule } from '@angular/material/input';
 import { MatChipInputEvent, MatChipsModule } from '@angular/material/chips';
 import { MatIconModule } from '@angular/material/icon';
-import * as authorsData from 'src/mocks/data/authors';
-import * as publishersData from 'src/mocks/data/publishers';
+import * as authorsData from './../../../../mocks/data/authors';
+import * as publishersData from './../../../../mocks/data/publishers';
 import { MatSelectModule } from '@angular/material/select';
 import { MatButtonModule } from '@angular/material/button';
 import { MatDialogContent, MatDialogModule, MatDialogRef } from '@angular/material/dialog';
@@ -33,7 +33,7 @@ export class BookFormComponent {
   private readonly dialogRef = inject(MatDialogRef<BookFormComponent>);
   private readonly bookStore = inject(BooksStore);
 
-  readonly reactiveKeywords = signal(['Computer', 'Literature & Fiction', 'Accounting & Finance', 'Science']);
+  readonly tags = signal(['Computer', 'Literature & Fiction', 'Accounting & Finance', 'Science']);
   readonly authorsList = signal(authorsData.default.data);
   readonly publishersList = signal(publishersData.default.data);
 
@@ -42,30 +42,42 @@ export class BookFormComponent {
     name: new FormControl('', Validators.required),
     description: new FormControl('', Validators.required),
     isbn: new FormControl('', Validators.required),
-    tags: new FormControl(this.reactiveKeywords()),
+    tags: new FormControl(this.tags()),
     price: new FormControl(0, Validators.required),
-    author: new FormControl([], Validators.required),
-    publisher: new FormControl([], Validators.required),
+    author: new FormControl([{ id: 1, name: '', created_at: '', updated_at: '' }], Validators.required),
+    publisher: new FormControl([{ id: 1, name: '', created_at: '', updated_at: '' }], Validators.required),
     created_at: new FormControl(new Date().toISOString()),
     updated_at: new FormControl(new Date().toISOString()),
   });
 
+  /**
+   * Remove a reactive keyword from the list of keywords.
+   * @param keyword the keyword to remove.
+   * If the keyword is not in the list, the list is left unchanged.
+   * @returns the updated list of keywords.
+   */
   removeReactiveKeyword(keyword: string) {
-    this.reactiveKeywords.update((keywords) => {
-      const index = keywords.indexOf(keyword);
+    this.tags.update((tags) => {
+      const index = tags.indexOf(keyword);
       if (index < 0) {
-        return keywords;
+        return tags;
       }
 
-      keywords.splice(index, 1);
-      return [...keywords];
+      tags.splice(index, 1);
+      return [...tags];
     });
   }
 
+  /**
+   * Adds a new keyword to the list of reactive keywords if the input value is not empty.
+   * Trims any whitespace from the input value before adding.
+   * Clears the input field after adding the keyword.
+   * @param event - The MatChipInputEvent containing the input value to be added.
+   */
   addReactiveKeyword(event: MatChipInputEvent): void {
     const value = (event.value || '').trim();
     if (value) {
-      this.reactiveKeywords.update((keywords) => [...keywords, value]);
+      this.tags.update((tags) => [...tags, value]);
     }
     event.chipInput?.clear();
   }
@@ -79,7 +91,7 @@ export class BookFormComponent {
         name: this.bookForm.value.name ?? '',
         description: this.bookForm.value.description ?? '',
         isbn: this.bookForm.value.isbn ?? '',
-        tags: this.bookForm.value.tags ?? this.reactiveKeywords(),
+        tags: this.bookForm.value.tags ?? this.tags(),
         price: this.bookForm.value.price ?? 0,
         author: this.bookForm.value.author ?? [],
         publisher: this.bookForm.value.publisher ?? [],

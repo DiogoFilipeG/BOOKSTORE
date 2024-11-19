@@ -20,9 +20,9 @@
       <mat-form-field>
         <mat-label>Tags</mat-label>
         <mat-chip-grid #reactiveChipGrid aria-label="Enter keywords for the book" formControlName="tags">
-          @for (keyword of reactiveKeywords(); track keyword) {
-          <mat-chip-row (removed)="removeReactiveKeyword(keyword)">
-            {{ keyword }}
+          @for (tag of tags(); track tag) {
+          <mat-chip-row (removed)="removeReactiveKeyword(tag)">
+            {{ tag }}
             <button matChipRemove aria-label="'Remove keyword ' + keyword">
               <mat-icon>cancel</mat-icon>
             </button>

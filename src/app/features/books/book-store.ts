@@ -3,7 +3,7 @@ import { signalStore, withComputed, withState, withMethods, patchState } from '@
 import { Book, BookList } from 'src/app/models/book.model';
 import { BooksService } from './books.service';
 import { map } from 'rxjs';
-import { LocalStorageService } from '@app/shared/local-storage.service';
+import { LocalStorageService } from './../../shared/local-storage.service';
 
 type BooksState = {
   total: number;

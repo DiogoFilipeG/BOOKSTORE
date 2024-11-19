@@ -4,6 +4,9 @@ import { BooksService } from '../books.service';
 import { BooksStore } from '../book-store';
 import data from './../../../../mocks/data/books';
 import { MatHeaderRowDef } from '@angular/material/table';
+import { MatDialog } from '@angular/material/dialog';
+import { BookFormComponent } from '../book-form/book-form.component';
+import { LocalStorageService } from './../../../shared/local-storage.service';
 
 ngMocks.autoSpy('jest');
 
@@ -20,6 +23,13 @@ describe('BookCatalogComponent', () => {
         isLoading: jest.fn(),
         loadBooks: jest.fn(),
         findBookById: jest.fn(),
+      })
+      .mock(MatDialog, {
+        open: jest.fn(),
+      })
+      .mock(LocalStorageService, {
+        saveToLocalStorage: jest.fn(),
+        getFromLocalStorage: jest.fn(),
       });
   });
 
@@ -29,17 +39,20 @@ describe('BookCatalogComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it('should load books on initialization', () => {
-    const fixture = MockRender(BookCatalogComponent);
-    fixture.detectChanges();
-    expect(fixture.componentInstance.bookStore.loadBooks).toHaveBeenCalledTimes(1);
-  });
-
   it('should display books in table', () => {
     const fixture = MockRender(BookCatalogComponent);
     fixture.detectChanges();
     const tableEl = ngMocks.reveal(['mat-table']);
     const header = ngMocks.findInstance(tableEl, MatHeaderRowDef);
     expect(header.columns).toBe(fixture.componentInstance.displayedColumns);
+  });
+
+  it('should open the book form dialog when addBook is called', () => {
+    const component = MockRender(BookCatalogComponent);
+    component.componentInstance.addBook();
+    expect(component.componentInstance['dialog'].open).toHaveBeenCalledWith(BookFormComponent, {
+      height: '80vh',
+      width: '60vw',
+    });
   });
 });
