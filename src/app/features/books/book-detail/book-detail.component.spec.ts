@@ -3,13 +3,16 @@ import { BookDetailComponent } from './book-detail.component';
 import { BooksStore } from '../book-store';
 import data from './../../../../mocks/data/books';
 import { of } from 'rxjs';
+import { BookSearchComponent } from '../book-search/book-search.component';
 
 describe('BookDetailComponent', () => {
   beforeEach(async () => {
-    await MockBuilder(BookDetailComponent).mock(BooksStore, {
-      findBookById: jest.fn().mockReturnValue(of(data.data[0])),
-      loadBooks: jest.fn(),
-    });
+    await MockBuilder(BookDetailComponent)
+      .mock(BooksStore, {
+        findBookById: jest.fn().mockReturnValue(of(data.data[0])),
+        loadBooks: jest.fn(),
+      })
+      .mock(BookSearchComponent);
   });
 
   it('should create', () => {

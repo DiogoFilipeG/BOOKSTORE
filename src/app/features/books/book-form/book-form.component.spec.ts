@@ -69,16 +69,6 @@ describe('BookFormComponent', () => {
     expect(component.bookForm.get('publisher')?.value).toEqual(mockFormData.publisher);
   });
 
-  // it('should add a reactive keyword', () => {
-  //   const fixture = MockRender(BookFormComponent);
-  //   const component = fixture.componentInstance;
-  //   const keyword = 'Test Keyword';
-
-  //   component.addReactiveKeyword();
-
-  //   expect(component.reactiveKeywords()).toContain(keyword);
-  // });
-
   it('should remove a reactive keyword', () => {
     const fixture = MockRender(BookFormComponent);
     const component = fixture.componentInstance;

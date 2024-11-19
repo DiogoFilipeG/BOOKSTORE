@@ -1,0 +1,15 @@
+<form [formGroup]="searchForm" class="d-flex flex-row">
+  <mat-form-field class="px-2 py-2 w-50">
+    <mat-label>Filter</mat-label>
+    <input formControlName="nameOrAuthor" matInput type="search" placeholder="Search by name or author" />
+  </mat-form-field>
+
+  <mat-form-field class="px-2 py-2">
+    <mat-label>Search by genre</mat-label>
+    <mat-select formControlName="genre" multiple>
+      @for (tag of tags(); track tag) {
+      <mat-option [value]="tag">{{ tag }}</mat-option>
+      }
+    </mat-select>
+  </mat-form-field>
+</form>

@@ -1,6 +1,6 @@
 # 🔮 Beyond Frontend Angular Assessment
 
-![Angular 15.2+](https://img.shields.io/badge/Angular-15.2+-EC1C24?style=flat-square&logo=angular&logoColor=EC1C24)
+![Angular 18+](https://img.shields.io/badge/Angular-15.2+-EC1C24?style=flat-square&logo=angular&logoColor=EC1C24)
 ![NodeJS 18.10](https://img.shields.io/badge/NodeJS-18.10+-green?style=flat-square)
 ![NPM 8.19.0](https://img.shields.io/badge/NPM-8.19.0+-red?style=flat-square)
 
@@ -35,6 +35,9 @@ and see the process we follow to build and deliver high-quality work at Beyond.
 
 Below is a detailed description of the tasks, once your tasks are complete you
 may proceed to the section below.
+
+**GBI-000**
+  This task is for layout, basic app setup, install of librarys.
 
 **GBI-001**
 
