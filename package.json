@@ -1,10 +1,10 @@
 {
-  "name": "bynd-frontend-assessment-angular",
+  "name": "frontend-assessment-angular",
   "version": "1.0.0",
-  "description": "BYND Frontend Angular coding assessment",
+  "description": "Frontend Angular coding assessment",
   "repository": {
     "type": "git",
-    "url": "git@bitbucket.org:byndops/bynd-frontend-assessment-angular.git"
+    "url": "/frontend-assessment-angular.git"
   },
   "contributors": [
     "Diogo Guinapo <diogo.filipe.guinapo@gmail.com>"
