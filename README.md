@@ -1,6 +1,6 @@
 # 🔮Frontend Angular Assessment
 
-![Angular 15.2+](https://img.shields.io/badge/Angular-15.2+-EC1C24?style=flat-square&logo=angular&logoColor=EC1C24)
+![Angular 18](https://img.shields.io/badge/Angular-15.2+-EC1C24?style=flat-square&logo=angular&logoColor=EC1C24)
 ![NodeJS 18.10](https://img.shields.io/badge/NodeJS-18.10+-green?style=flat-square)
 ![NPM 8.19.0](https://img.shields.io/badge/NPM-8.19.0+-red?style=flat-square)
 
