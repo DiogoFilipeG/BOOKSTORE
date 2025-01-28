@@ -116,14 +116,3 @@ To run the Application locally use the `npm start` command then open [http://loc
 | `npm run lint:styles:fix`   | Fix stylelint errors                       |
 | `npm run test`              | Run tests                                  |
 
-## ⚖️ Copyright
-
-Copyright © 2022 Beyond. All Rights Reserved.
-
-This software cannot be copied and/or redistributed via any medium without the
-express written permission of Beyond. See the accompanying [LICENSE] for
-details.
-
-**Proprietary and confidential.**
-
-[license]: LICENSE
