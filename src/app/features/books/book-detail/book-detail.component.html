@@ -1,0 +1,14 @@
+<div class="m-3">
+  <p><strong>Book Name:</strong> {{ bookData()?.title }}</p>
+  <strong>Book Details:</strong>
+  <div class="m-2">
+    <p><strong>Description:</strong> {{ bookData()?.description }}</p>
+    <p><strong>ISBN:</strong> {{ bookData()?.isbn }}</p>
+    <p><strong>Tag(s):</strong> {{ bookData()?.tags }}</p>
+    <p><strong>Price:</strong> {{ bookData()?.price | currency: 'EUR' }}</p>
+    <p><strong>Author(s):</strong> {{ bookData()?.author }}</p>
+    <p><strong>Publisher(s):</strong> {{ bookData()?.publisher }}</p>
+    <p><strong>Created at:</strong> {{ bookData()?.createdAt | date }}</p>
+    <p><strong>Updated at:</strong> {{ bookData()?.updatedAt | date }}</p>
+  </div>
+</div>

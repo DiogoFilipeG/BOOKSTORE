@@ -1,0 +1,76 @@
+<h4 mat-dialog-title>Add New Book</h4>
+<mat-dialog-content>
+  <form [formGroup]="bookForm">
+    <div class="d-flex flex-column">
+      <mat-form-field>
+        <mat-label>Name</mat-label>
+        <input matInput formControlName="name" placeholder="Enter the book name" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Description</mat-label>
+        <textarea matInput formControlName="description" placeholder="Enter the book description"></textarea>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>ISBN</mat-label>
+        <input matInput formControlName="isbn" placeholder="Enter the ISBN" />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Tags</mat-label>
+        <mat-chip-grid #reactiveChipGrid aria-label="Enter keywords for the book" formControlName="tags">
+          @for (tag of tags(); track tag) {
+          <mat-chip-row (removed)="removeReactiveKeyword(tag)">
+            {{ tag }}
+            <button matChipRemove aria-label="'Remove keyword ' + keyword">
+              <mat-icon>cancel</mat-icon>
+            </button>
+          </mat-chip-row>
+          }
+        </mat-chip-grid>
+        <input
+          placeholder="New keyword..."
+          [matChipInputFor]="reactiveChipGrid"
+          (matChipInputTokenEnd)="addReactiveKeyword($event)"
+        />
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Price</mat-label>
+        <input matInput formControlName="price" type="number" placeholder="0" min="0" />
+        <span matPrefix>€ &nbsp;</span>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Author(s)</mat-label>
+        <mat-select formControlName="author" multiple>
+          @for (author of authorsList(); track author.id) {
+          <mat-option [value]="author">{{ author.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label>Publisher(s)</mat-label>
+        <mat-select formControlName="publisher" multiple>
+          @for (publisher of publishersList(); track publisher.id) {
+          <mat-option [value]="publisher">{{ publisher.name }}</mat-option>
+          }
+        </mat-select>
+      </mat-form-field>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button aria-label="Cancel new book creation" mat-raised-button mat-dialog-close>Cancel</button>
+  <button
+    aria-label="Submit new book creation"
+    mat-raised-button
+    type="submit"
+    [disabled]="!bookForm.valid"
+    (click)="submit()"
+  >
+    Save
+  </button>
+</mat-dialog-actions>
