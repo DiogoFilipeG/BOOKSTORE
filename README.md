@@ -57,28 +57,6 @@ may proceed to the section below.
   Genres should be able to be selected as options from existing genres in the
   current catalog.
 
-> **TIP** We'll be looking at the following when reviewing your submission;
-> code standards, complexity, optimizations, code performance and Git usage. If
-> you're called for an interview, we'll reserve some time to discuss your
-> submission. Think about the challenges you faced, your approach and
-> improvements you'd make to this project.
-
-## 📬 Submitting Your Work
-
-**This project took time to create, please do not publish this work!**
-
-To get your contributions over to us, please use one of the following options:
-
-1. Create a **private** repo on Github and share access with a member of our
-   team.
-2. Send a `.zip` file containing this project, your contributions and the Git
-   history.
-3. Send a Git `.patch` file of your changes.
-
-We'll assess your work and share feedback through the recruitment channels.
-
-Thank you for taking the time to complete this technical assessment, we wish
-you the best of luck and will be in touch.
 
 ## 🧭 Getting Started
 
